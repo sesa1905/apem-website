@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Apem.id — Aplikasi Premium (Black Gold)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070607; --muted:#cfc7bf; --gold:#b8860b; --gold2:#ffd86b; --text:#fff8ef;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:radial-gradient(1200px 400px at 10% 10%, rgba(255,215,0,0.02), transparent 10%),var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+.header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid rgba(255,215,0,0.06);background:linear-gradient(90deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35))}
+.brand{display:flex;align-items:center;gap:14px}
+.logo-img{width:48px;height:48px;object-fit:contain;border-radius:10px}
+.brand-title{display:flex;flex-direction:column}
+.brand-title .title{font-weight:700;font-size:18px}
+.brand-title .subtitle{font-size:12px;color:var(--muted)}
+.search-wrap{display:flex;align-items:center;gap:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:8px 12px;border-radius:10px;border:1px solid rgba(255,215,0,0.06);min-width:320px}
+.search-wrap input{background:transparent;border:0;outline:0;color:var(--text);width:100%}
+.tag{background:linear-gradient(90deg,var(--gold),var(--gold2));padding:6px 10px;border-radius:999px;color:#1a1200;font-weight:700;font-size:12px}
+.wrap{max-width:1140px;margin:22px auto;padding:0 18px}
+.hero-left h1{margin:0;font-size:22px}
+.hero-left p{color:var(--muted);margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;border:1px solid rgba(255,215,0,0.04);display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:transform .18s}
+.card:hover{transform:translateY(-6px)}
+.prod-img{width:100%;height:120px;object-fit:contain;border-radius:10px;background:#000;display:flex;align-items:center;justify-content:center}
+.card h3{margin:8px 0 0 0;font-size:15px}
+.card p.desc{color:var(--muted);font-size:13px;margin:6px 0}
+.price{margin-top:10px;font-weight:700;color:var(--gold)}
+.actions{display:flex;gap:8px;margin-top:12px}
+.btn-primary{background:linear-gradient(90deg,var(--gold),#e6c36b);color:#2b1700;border:0;padding:9px;border-radius:10px;flex:1;cursor:pointer;font-weight:700}
+.btn-outline{background:transparent;border:1px solid rgba(255,215,0,0.06);color:var(--muted);padding:9px;border-radius:10px;cursor:pointer;flex:1}
+.cartbar{position:fixed;right:18px;bottom:18px;width:360px;background:linear-gradient(180deg,#0e0d10,#171417);border:1px solid rgba(255,215,0,0.04);padding:12px;border-radius:12px;box-shadow:0 24px 50px rgba(0,0,0,0.6);z-index:60}
+.cart-items{max-height:280px;overflow:auto}
+.cart-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+.cart-row input{width:64px;padding:6px;border-radius:8px;border:1px solid rgba(255,215,0,0.04);background:transparent;color:var(--text)}
+.checkout-btn{margin-top:10px;background:linear-gradient(90deg,#cfa33a,#ffd86b);border:0;padding:10px;border-radius:10px;cursor:pointer;font-weight:700;color:#2b1700;width:100%}
+.modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:80}
+.modal-back.show{display:flex}
+.modal{width:100%;max-width:760px;background:linear-gradient(180deg,#0f0e11,#171518);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);color:var(--text)}
+.input{width:100%;padding:9px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text);margin-top:8px}
+.qris-img{width:220px;height:220px;padding:8px;border-radius:12px;object-fit:contain;background:#fff}
+.status-pill{padding:8px 12px;border-radius:999px;font-weight:700}
+.footer{margin-top:40px;padding:30px 0;text-align:center;color:var(--muted)}
+.small-muted{color:var(--muted);font-size:13px}
+@media(max-width:900px){ .search-wrap{min-width:160px} .cartbar{width:92%;left:4%;right:4%} .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))} }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="brand">
+    <img class="logo-img" src="assets/images/logo-apem.png" alt="Apem.id Logo">
+    <div class="brand-title">
+      <div class="title">Apem.id</div>
+      <div class="subtitle">Store Aplikasi Premium & Terpercaya</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="#ffd86b" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="searchInput" placeholder="Cari produk, mis. Canva" oninput="onSearch()">
+    </div>
+    <div class="tag">Premium</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="hero-left">
+      <h1>Marketplace Aplikasi Premium</h1>
+      <p class="small-muted">Pilih produk — tambah ke keranjang — pilih metode bayar (QRIS atau WA manual).</p>
+    </div>
+  </div>
+  <section>
+    <div id="grid" class="grid"></div>
+    <div id="notFound" style="display:none;text-align:center;margin-top:18px;color:var(--muted)">Produk tidak ditemukan.</div>
+  </section>
+  <div class="footer">© 2025 Apem.id • All rights reserved</div>
+</main>
+
+<!-- Cart -->
+<div class="cartbar">
+  <h4>Keranjang (<span id="cartCount">0</span>)</h4>
+  <div class="cart-items" id="cartItems"></div>
+  <div style="margin-top:10px">
+    <input id="buyerEmail" class="input" placeholder="Email pembeli (opsional)"/>
+    <input id="buyerPhone" class="input" placeholder="Nomor WA pembeli"/>
+    <div id="cartTotal" class="small-muted" style="margin-top:8px">Total: Rp 0</div>
+    <button id="checkoutBtn" class="checkout-btn" onclick="openPaymentModal()" disabled>Pilih Metode Pembayaran</button>
+  </div>
+</div>
+
+<!-- Modal Payment & QR -->
+<div id="paymentModal" class="modal-back" onclick="if(event.target===paymentModal){closePaymentModal()}">
+  <div class="modal">
+    <h3>Pilih Metode Pembayaran</h3>
+    <p class="small-muted">Demo: QRIS disimulasikan di frontend.</p>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn-primary" onclick="startQRIS()">QRIS (Scan & Bayar)</button>
+      <button class="btn-outline" onclick="checkoutViaWA()">Bayar via WhatsApp</button>
+      <button class="btn-outline" onclick="closePaymentModal()">Batal</button>
+    </div>
+  </div>
+</div>
+
+<div id="qrisModal" class="modal-back" onclick="if(event.target===qrisModal){closeQRISModal()}">
+  <div class="modal">
+    <h3>QRIS — Scan untuk Membayar</h3>
+    <div class="qris-box" style="margin-top:12px">
+      <img id="qrisImage" class="qris-img" src="assets/images/qris_demo.jpg" alt="QRIS">
+      <div id="qrisInfo" class="small-muted">Scan QRIS & Bayar</div>
+      <div id="qrisStatus" style="margin-top:8px"></div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn-primary" onclick="simulatePayment()">Simulasikan Pembayaran</button>
+        <button class="btn-outline" onclick="closeQRISModal()">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Detail Produk -->
+<div id="modalBack" class="modal-back" onclick="if(event.target===modalBack){closeModal()}">
+  <div class="modal" id="modalBox">
+    <h3 id="modalTitle">Judul</h3>
+    <p id="modalDesc" class="small-muted"></p>
+    <div id="modalPrice" style="margin-top:8px;font-weight:700;color:var(--gold)"></div>
+    <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+      <label style="color:var(--muted);font-size:13px">Jumlah</label>
+      <input id="modalQty" class="input" type="number" min="1" value="1" style="max-width:100px"/>
+      <button class="btn-primary" onclick="modalAddToCart()">Tambah ke Keranjang</button>
+      <button class="btn-outline" onclick="closeModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// === DATA PRODUK ===
+const WA_ADMIN='6282140094614';
+let CART=JSON.parse(localStorage.getItem('apem_cart')||'[]');
+let selectedDetailId=null;
+
+const PRODUCTS=[
+  {id:'canva_pro',title:'Canva Pro',price:12000,cat:'Design',desc:'Template & fitur premium untuk desain',img:'assets/images/canva_pro.jpg'},
+  {id:'capcut',title:'CapCut Premium',price:10000,cat:'Video',desc:'Editor video dengan fitur pro',img:'assets/images/capcut.jpg'},
+  {id:'kinemaster',title:'Kinemaster Premium',price:12000,cat:'Video',desc:'Editor profesional di HP',img:'assets/images/kinemaster.jpg'},
+  {id:'alight',title:'Alight Motion Premium',price:10000,cat:'Motion',desc:'Motion graphics & visual effect',img:'assets/images/alight.jpg'},
+  {id:'vn',title:'VN Editor Premium',price:9000,cat:'Video',desc:'Editor ringan & powerful',img:'assets/images/vn.jpg'},
+  {id:'pixellab',title:'Pixellab Pro',price:8000,cat:'Design',desc:'Text & sticker editor mobile',img:'assets/images/pixellab.jpg'},
+  {id:'filmora',title:'Filmora Premium',price:15000,cat:'Video',desc:'Editor desktop mudah digunakan',img:'assets/images/filmora.jpg'},
+  {id:'adobe_express',title:'Adobe Express / Premiere Rush',price:14000,cat:'Design/Video',desc:'Adobe ringan untuk konten',img:'assets/images/adobe_express.jpg'},
+  {id:'lightroom',title:'Lightroom / Photoshop Express Premium',price:15000,cat:'Photo',desc:'Edit foto profesional',img:'assets/images/lightroom.jpg'},
+  {id:'m365',title:'Microsoft 365 (Word,PPT,Excel)',price:40000,cat:'Office',desc:'Office suite lengkap',img:'assets/images/m365.jpg'},
+  {id:'wps',title:'WPS Office Premium',price:8000,cat:'Office',desc:'Alternatif ringan Office',img:'assets/images/wps.jpg'},
+  {id:'gworkspace',title:'Google Workspace',price:35000,cat:'Cloud',desc:'Drive & Docs premium',img:'assets/images/gworkspace.jpg'},
+  {id:'grammarly',title:'Grammarly Premium',price:12000,cat:'Writing',desc:'Pemeriksa tata bahasa & gaya',img:'assets/images/grammarly.jpg'},
+  {id:'turnitin',title:'Turnitin (akses premium)',price:30000,cat:'Academic',desc:'Plagiarism check & laporan',img:'assets/images/turnitin.jpg'},
+  {id:'photomath',title:'Photomath Plus',price:9000,cat:'Education',desc:'Solusi soal matematika',img:'assets/images/photomath.jpg'},
+  {id:'wolfram',title:'Wolfram Alpha Premium',price:15000,cat:'Education',desc:'Komputasi & riset',img:'assets/images/wolfram.jpg'},
+  {id:'quizlet',title:'Quizlet Plus',price:8000,cat:'Education',desc:'Belajar kartu & kuis',img:'assets/images/quizlet.jpg'},
+  {id:'kahoot',title:'Kahoot! Premium',price:8000,cat:'Education',desc:'Kuiz interaktif',img:'assets/images/kahoot.jpg'},
+  {id:'notion',title:'Notion Plus',price:10000,cat:'Productivity',desc:'Workspace & notes',img:'assets/images/notion.jpg'},
+  {id:'duolingo',title:'Duolingo Plus',price:8000,cat:'Education',desc:'Belajar bahasa tanpa iklan',img:'assets/images/duolingo.jpg'},
+  {id:'spotify',title:'Spotify Premium',price:13000,cat:'Music',desc:'Streaming musik tanpa iklan',img:'assets/images/spotify.jpg'},
+  {id:'youtube',title:'YouTube Premium',price:15000,cat:'Video',desc:'YouTube tanpa iklan & background play',img:'assets/images/youtube.jpg'},
+  {id:'chatgpt',title:'ChatGPT Plus / Claude Pro',price:25000,cat:'AI',desc:'Akses model premium',img:'assets/images/chatgpt.jpg'},
+  {id:'vpn',title:'VPN Premium (Nord/Turbo)',price:18000,cat:'Security',desc:'VPN cepat & aman',img:'assets/images/vpn.jpg'},
+  {id:'ebook',title:'E-book Services (Gramedia Digital)',price:8000,cat:'E-book',desc:'Akses buku digital & perpustakaan',img:'assets/images/ebook.jpg'}
+];
+
+// === RENDER PRODUCTS ===
+const gridEl=document.getElementById('grid');
+function renderProducts(filter=''){
+  const q=String(filter||'').toLowerCase().trim();
+  const html=PRODUCTS.map(p=>{
+    if(!(p.title.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)||(p.desc&&p.desc.toLowerCase().includes(q)))) return '';
+    const imgSrc=p.img||'assets/images/no-image.jpg';
+    return `<article class="card" data-id="${p.id}">
+      <div>
+        <div class="prod-img"><img src="${imgSrc}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;border-radius:8px"/></div>
+        <h3>${p.title}</h3>
+        <p class="desc">${p.desc||''}</p>
+        <div class="price">Rp ${p.price.toLocaleString()}</div>
+      </div>
+      <div class="actions">
+        <button class="btn-primary" onclick="showDetail('${p.id}')">Detail</button>
+      </div>
+    </article>`;
+  }).join('');
+  gridEl.innerHTML=html||'';
+  document.getElementById('notFound').style.display=html?'none':'block';
+}
+function onSearch(){renderProducts(document.getElementById('searchInput').value)}
+renderProducts();
+
+// === MODAL DETAIL ===
+const modalBack=document.getElementById('modalBack');
+function showDetail(id){
+  selectedDetailId=id;
+  const p=PRODUCTS.find(x=>x.id===id);
+  document.getElementById('modalTitle').innerText=p.title;
+  document.getElementById('modalDesc').innerText=p.desc||'';
+  document.getElementById('modalPrice').innerText='Rp '+p.price.toLocaleString();
+  document.getElementById('modalQty').value=1;
+  modalBack.classList.add('show');
+}
+function closeModal(){modalBack.classList.remove('show')}
+function modalAddToCart(){
+  const qty=parseInt(document.getElementById('modalQty').value)||1;
+  const existing=CART.find(x=>x.id===selectedDetailId);
+  if(existing){existing.qty+=qty;}else{CART.push({id:selectedDetailId,qty})}
+  updateCart();
+  closeModal();
+}
+
+// === CART ===
+function updateCart(){
+  localStorage.setItem('apem_cart',JSON.stringify(CART));
+  document.getElementById('cartCount').innerText=CART.reduce((a,c)=>a+c.qty,0);
+  const html=CART.map(item=>{
+    const p=PRODUCTS.find(x=>x.id===item.id);
+    return `<div class="cart-row">
+      <div>${p.title}</div>
+      <input type="number" min="1" value="${item.qty}" onchange="updateQty('${item.id}',this.value)"/>
+      <div>Rp ${(p.price*item.qty).toLocaleString()}</div>
+      <button onclick="removeCart('${item.id}')" class="btn-outline" style="padding:2px 6px;font-size:12px">×</button>
+    </div>`;
+  }).join('');
+  document.getElementById('cartItems').innerHTML=html;
+  const total=CART.reduce((a,c)=>a+(PRODUCTS.find(p=>p.id===c.id).price*c.qty),0);
+  document.getElementById('cartTotal').innerText='Total: Rp '+total.toLocaleString();
+  document.getElementById('checkoutBtn').disabled=!CART.length;
+}
+function updateQty(id,val){const c=CART.find(x=>x.id===id);if(c)c.qty=parseInt(val)||1;updateCart()}
+function removeCart(id){CART=CART.filter(x=>x.id!==id);updateCart()}
+updateCart();
+
+// === PAYMENT MODAL ===
+const paymentModal=document.getElementById('paymentModal');
+const qrisModal=document.getElementById('qrisModal');
+function openPaymentModal(){paymentModal.classList.add('show')}
+function closePaymentModal(){paymentModal.classList.remove('show')}
+function startQRIS(){paymentModal.classList.remove('show');qrisModal.classList.add('show')}
+function closeQRISModal(){qrisModal.classList.remove('show')}
+
+// Simulate QRIS Payment
+function simulatePayment(){
+  document.getElementById('qrisStatus').innerHTML='<span class="status-pill" style="background:#2b662b">Pembayaran Berhasil!</span>';
+  CART=[];
+  updateCart();
+}
+
+// WA Checkout
+function checkoutViaWA(){
+  const name=document.getElementById('buyerEmail').value||'';
+  const phone=document.getElementById('buyerPhone').value||'';
+  if(!phone){alert('Isi nomor WA terlebih dahulu');return;}
+  const list=CART.map(c=>{const p=PRODUCTS.find(x=>x.id===c.id);return `${p.title} x${c.qty} = Rp ${(p.price*c.qty).toLocaleString()}`}).join('\n');
+  const total=CART.reduce((a,c)=>a+(PRODUCTS.find(p=>p.id===c.id).price*c.qty),0);
+  const text=`Halo, saya ingin memesan produk:\n${list}\nTotal: Rp ${total.toLocaleString()}\nEmail: ${name}\nWA: ${phone}`;
+  const waUrl=`https://wa.me/${WA_ADMIN}?text=${encodeURIComponent(text)}`;
+  window.open(waUrl,'_blank');
+  closePaymentModal();
+}
+</script>
+
+</body>
+</html>
